@@ -148,9 +148,9 @@ class TestApprovalRegistrationViews(TestCase):
                         'django.contrib.auth.middleware.AuthenticationMiddleware',
                         'django.contrib.messages.middleware.MessageMiddleware',
                         'django.middleware.clickjacking.XFrameOptionsMiddleware',
-                        'bhtom_common.middleware.Raise403Middleware',
-                        'bhtom_common.middleware.ExternalServiceMiddleware',
-                        'bhtom_common.middleware.AuthStrategyMiddleware',
+                        'bhtom_base.bhtom_common.middleware.Raise403Middleware',
+                        'bhtom_base.bhtom_common.middleware.ExternalServiceMiddleware',
+                        'bhtom_base.bhtom_common.middleware.AuthStrategyMiddleware',
                         'bhtom_custom_registration.bhtom_registration.middleware.RedirectAuthenticatedUsersFromRegisterMiddleware'])
 class TestMiddleware(TestCase):
     def setUp(self):
