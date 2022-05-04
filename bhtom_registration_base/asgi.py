@@ -1,5 +1,5 @@
 """
-ASGI config for tom_registration project.
+ASGI config for bhtom_registration project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tom_registration_base.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bhtom_registration_base.settings')
 
 application = get_asgi_application()

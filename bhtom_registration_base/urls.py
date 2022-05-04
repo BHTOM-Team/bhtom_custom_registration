@@ -1,4 +1,4 @@
-"""tom_registration URL Configuration
+"""bhtom_registration URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -17,6 +17,6 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('', include('tom_registration.urls', namespace='registration')),
+    path('', include('bhtom_custom_registration.bhtom_registration.urls', namespace='registration')),
     path('admin/', admin.site.urls),
 ]

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 register = template.Library()
 
 
-@register.inclusion_tag('tom_registration/partials/register_button.html')
+@register.inclusion_tag('bhtom_registration/partials/register_button.html')
 def registration_button():
     """
     Renders a register button that navigates the user to the registration form.
@@ -12,7 +12,7 @@ def registration_button():
     return
 
 
-@register.inclusion_tag('tom_registration/partials/pending_users.html', takes_context=True)
+@register.inclusion_tag('bhtom_registration/partials/pending_users.html', takes_context=True)
 def pending_users(context: dict) -> dict:
     """
     Renders a table of pending (AKA inactive) users with buttons to approve or delete the user.

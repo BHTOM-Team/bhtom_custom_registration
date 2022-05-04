@@ -10,9 +10,9 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.shortcuts import redirect, reverse
 from django.urls import reverse_lazy
 
-from tom_common.mixins import SuperuserRequiredMixin
-from tom_registration.registration_flows.approval_required.forms import ApproveUserForm
-from tom_registration.registration_flows.approval_required.forms import RegistrationApprovalForm
+from bhtom_base.bhtom_common.mixins import SuperuserRequiredMixin
+from bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.forms import ApproveUserForm
+from bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.forms import RegistrationApprovalForm
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +24,7 @@ class ApprovalRegistrationView(CreateView):
     them as inactive, requiring administrator approval in order to log in. Upon registration, an email is sent to the
     administrators of the TOM informing them of the request.
     """
-    template_name = 'tom_registration/register_user.html'
+    template_name = 'bhtom_registration/register_user.html'
     success_url = reverse_lazy(settings.TOM_REGISTRATION.get('REGISTRATION_REDIRECT_PATTERN', ''))
     form_class = RegistrationApprovalForm
 
@@ -58,7 +58,7 @@ class UserApprovalView(SuperuserRequiredMixin, UpdateView):
     an email is sent to the user informing them of the registration approval.
     """
     model = User
-    template_name = 'tom_registration/approve_user.html'
+    template_name = 'bhtom_registration/approve_user.html'
     success_url = reverse_lazy('user-list')
     form_class = ApproveUserForm
 

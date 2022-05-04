@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 
-from tom_common.forms import CustomUserCreationForm
+from bhtom_base.bhtom_common.forms import CustomUserCreationForm
 
 
 class RegistrationApprovalForm(CustomUserCreationForm):

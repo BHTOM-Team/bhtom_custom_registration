@@ -1,10 +1,10 @@
 from django.contrib.auth.views import LoginView
 from django.urls import path
 
-from tom_registration.registration_flows.approval_required.forms import ApprovalAuthenticationForm
-from tom_registration.registration_flows.approval_required.views import ApprovalRegistrationView, UserApprovalView
+from bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.forms import ApprovalAuthenticationForm
+from bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.views import ApprovalRegistrationView, UserApprovalView
 
-app_name = 'tom_registration'
+app_name = 'bhtom_custom_registration.bhtom_registration'
 
 
 urlpatterns = [

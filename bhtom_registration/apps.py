@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class TomRegistrationConfig(AppConfig):
-    name = 'tom_registration'
+    name = 'bhtom_custom_registration.bhtom_registration'

@@ -17,7 +17,7 @@ The two registration flows are as follows:
 
  1. Install the package into your TOM environment:
    ```bash
-   pip install tom_registration
+   pip install bhtom_registration
    ```
 
  2. In your project `settings.py`, add `tom_registration` to your `INSTALLED_APPS` setting:
@@ -25,7 +25,7 @@ The two registration flows are as follows:
     ```python
     INSTALLED_APPS = [
         ...
-        'tom_registration',
+        'bhtom_registration',
     ]
     ```
 
@@ -44,8 +44,8 @@ The two registration flows are as follows:
     ```python
     MIDDLEWARE = [
         ...
-        'tom_common.middleware.AuthStrategyMiddleware',
-        'tom_registration.middleware.RedirectAuthenticatedUsersFromRegisterMiddleware',
+        'bhtom_common.middleware.AuthStrategyMiddleware',
+        'bhtom_registration.middleware.RedirectAuthenticatedUsersFromRegisterMiddleware',
     ]
     ```
 

@@ -41,19 +41,19 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_extensions',
     'guardian',
-    'tom_common',
+    'bhtom_base.bhtom_common',
     'django_comments',
     'bootstrap4',
     'crispy_forms',
     'rest_framework',
     'django_filters',
     'django_gravatar',
-    'tom_targets',
-    'tom_alerts',
-    'tom_catalogs',
-    'tom_observations',
-    'tom_dataproducts',
-    'tom_registration',
+    'bhtom_base.bhtom_targets',
+    'bhtom_base.bhtom_alerts',
+    'bhtom_base.bhtom_catalogs',
+    'bhtom_base.bhtom_observations',
+    'bhtom_base.bhtom_dataproducts',
+    'bhtom_custom_registration.bhtom_registration',
 ]
 
 SITE_ID = 1
@@ -66,12 +66,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'tom_common.middleware.Raise403Middleware',
-    'tom_common.middleware.ExternalServiceMiddleware',
-    'tom_common.middleware.AuthStrategyMiddleware',
+    'bhtom_common.middleware.Raise403Middleware',
+    'bhtom_common.middleware.ExternalServiceMiddleware',
+    'bhtom_common.middleware.AuthStrategyMiddleware',
 ]
 
-ROOT_URLCONF = 'tom_registration_base.urls'
+ROOT_URLCONF = 'bhtom_registration_base.urls'
 
 TEMPLATES = [
     {
@@ -91,7 +91,7 @@ TEMPLATES = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-WSGI_APPLICATION = 'tom_registration_base.wsgi.application'
+WSGI_APPLICATION = 'bhtom_registration_base.wsgi.application'
 
 
 # Database
@@ -225,26 +225,26 @@ DATA_PRODUCT_TYPES = {
 }
 
 DATA_PROCESSORS = {
-    'photometry': 'tom_dataproducts.processors.photometry_processor.PhotometryProcessor',
-    'spectroscopy': 'tom_dataproducts.processors.spectroscopy_processor.SpectroscopyProcessor',
+    'photometry': 'bhtom_dataproducts.processors.photometry_processor.PhotometryProcessor',
+    'spectroscopy': 'bhtom_dataproducts.processors.spectroscopy_processor.SpectroscopyProcessor',
 }
 
 TOM_FACILITY_CLASSES = [
-    'tom_observations.facilities.lco.LCOFacility',
-    'tom_observations.facilities.gemini.GEMFacility',
-    'tom_observations.facilities.soar.SOARFacility',
-    'tom_observations.facilities.lt.LTFacility'
+    'bhtom_observations.facilities.lco.LCOFacility',
+    'bhtom_observations.facilities.gemini.GEMFacility',
+    'bhtom_observations.facilities.soar.SOARFacility',
+    'bhtom_observations.facilities.lt.LTFacility'
 ]
 
 TOM_ALERT_CLASSES = [
-    'tom_alerts.brokers.alerce.ALeRCEBroker',
-    'tom_alerts.brokers.antares.ANTARESBroker',
-    'tom_alerts.brokers.gaia.GaiaBroker',
-    'tom_alerts.brokers.lasair.LasairBroker',
-    'tom_alerts.brokers.mars.MARSBroker',
-    'tom_alerts.brokers.scimma.SCIMMABroker',
-    'tom_alerts.brokers.scout.ScoutBroker',
-    'tom_alerts.brokers.tns.TNSBroker',
+    'bhtom_base.bhtom_alerts.brokers.alerce.ALeRCEBroker',
+    'bhtom_base.bhtom_alerts.brokers.antares.ANTARESBroker',
+    'bhtom_base.bhtom_alerts.brokers.gaia.GaiaBroker',
+    'bhtom_base.bhtom_alerts.brokers.lasair.LasairBroker',
+    'bhtom_base.bhtom_alerts.brokers.mars.MARSBroker',
+    'bhtom_base.bhtom_alerts.brokers.scimma.SCIMMABroker',
+    'bhtom_base.bhtom_alerts.brokers.scout.ScoutBroker',
+    'bhtom_base.bhtom_alerts.brokers.tns.TNSBroker',
 ]
 
 BROKERS = {
@@ -285,9 +285,9 @@ TARGET_PERMISSIONS_ONLY = True
 OPEN_URLS = []
 
 HOOKS = {
-    'target_post_save': 'tom_common.hooks.target_post_save',
-    'observation_change_state': 'tom_common.hooks.observation_change_state',
-    'data_product_post_upload': 'tom_dataproducts.hooks.data_product_post_upload'
+    'target_post_save': 'bhtom_common.hooks.target_post_save',
+    'observation_change_state': 'bhtom_common.hooks.observation_change_state',
+    'data_product_post_upload': 'bhtom_dataproducts.hooks.data_product_post_upload'
 }
 
 AUTO_THUMBNAILS = False

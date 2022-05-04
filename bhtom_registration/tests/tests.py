@@ -11,7 +11,7 @@ from django.shortcuts import reverse
 from django.test import override_settings, TestCase
 
 
-@override_settings(ROOT_URLCONF='tom_registration.tests.urls.test_open_urls')
+@override_settings(ROOT_URLCONF='bhtom_custom_registration.bhtom_registration.tests.urls.test_open_urls')
 class TestOpenRegistrationViews(TestCase):
     def setUp(self):
         self.user_data = {
@@ -37,10 +37,10 @@ class TestOpenRegistrationViews(TestCase):
         Test that an error message is logged correctly when a newly-registered user has an automated login failure.
         """
         del settings.REGISTRATION_AUTHENTICATION_BACKEND
-        with self.assertLogs('tom_registration.registration_flows.open.views', level='ERROR') as logs:
+        with self.assertLogs('bhtom_custom_registration.bhtom_registration.registration_flows.open.views', level='ERROR') as logs:
             response = self.client.post(reverse('registration:register'), data=self.user_data)
             self.assertIn(
-                'ERROR:tom_registration.registration_flows.open.views:Unable to log in newly registered user: '
+                'ERROR:bhtom_custom_registration.bhtom_registration.registration_flows.open.views:Unable to log in newly registered user: '
                 'You have multiple authentication backends configured and therefore must provide the `backend` argument'
                 ' or set the `backend` attribute on the user.', logs.output)
 
@@ -48,7 +48,7 @@ class TestOpenRegistrationViews(TestCase):
         self.assertTrue(auth.get_user(self.client).is_anonymous)
 
 
-@override_settings(ROOT_URLCONF='tom_registration.tests.urls.test_approval_required_urls',
+@override_settings(ROOT_URLCONF='bhtom_custom_registration.bhtom_registration.tests.urls.test_approval_required_urls',
                    AUTHENTICATION_BACKENDS=(
                        'django.contrib.auth.backends.AllowAllUsersModelBackend',
                        'guardian.backends.ObjectPermissionBackend',
@@ -97,14 +97,14 @@ class TestApprovalRegistrationViews(TestCase):
         self.assertIn(f'Registration Request from {self.user_data["first_name"]} {self.user_data["last_name"]}',
                       mail.outbox[0].subject)
 
-    @patch('tom_registration.registration_flows.approval_required.views.mail_managers')
+    @patch('bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.views.mail_managers')
     def test_user_register_email_send_failure(self, mock_mail_managers):
         """Test that a registration email send failure logs the correct error message."""
         mock_mail_managers.side_effect = SMTPException('exception content')
-        with self.assertLogs('tom_registration.registration_flows.approval_required.views', level='ERROR') as logs:
+        with self.assertLogs('bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.views', level='ERROR') as logs:
             self.client.post(reverse('registration:register'), data=self.user_data)
             self.assertIn(
-                'ERROR:tom_registration.registration_flows.approval_required.views:'
+                'ERROR:bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.views:'
                 'Unable to send email: exception content',
                 logs.output)
 
@@ -121,7 +121,7 @@ class TestApprovalRegistrationViews(TestCase):
         self.assertEqual(len(mail.outbox), 2)  # There should be two--one for the registration, one for the approval
         self.assertIn('Your registration has been approved!', mail.outbox[1].subject)
 
-    @patch('tom_registration.registration_flows.approval_required.views.send_mail')
+    @patch('bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.views.send_mail')
     def test_user_approve_email_send_failure(self, mock_send_mail):
         """Test that an approval email send failure logs the correct error message."""
         self.client.force_login(self.superuser)
@@ -131,15 +131,15 @@ class TestApprovalRegistrationViews(TestCase):
         user = User.objects.create(**test_user_data, is_active=False)
         mock_send_mail.side_effect = SMTPException('exception content')
 
-        with self.assertLogs('tom_registration.registration_flows.approval_required.views', level='ERROR') as logs:
+        with self.assertLogs('bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.views', level='ERROR') as logs:
             self.client.post(reverse('registration:approve', kwargs={'pk': user.id}), data=test_user_data)
             self.assertIn(
-                'ERROR:tom_registration.registration_flows.approval_required.views:'
+                'ERROR:bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.views:'
                 'Unable to send email: exception content',
                 logs.output)
 
 
-@override_settings(ROOT_URLCONF='tom_registration.tests.urls.test_open_urls',
+@override_settings(ROOT_URLCONF='bhtom_custom_registration.bhtom_registration.tests.urls.test_open_urls',
                    MIDDLEWARE=[
                         'django.middleware.security.SecurityMiddleware',
                         'django.contrib.sessions.middleware.SessionMiddleware',
@@ -148,10 +148,10 @@ class TestApprovalRegistrationViews(TestCase):
                         'django.contrib.auth.middleware.AuthenticationMiddleware',
                         'django.contrib.messages.middleware.MessageMiddleware',
                         'django.middleware.clickjacking.XFrameOptionsMiddleware',
-                        'tom_common.middleware.Raise403Middleware',
-                        'tom_common.middleware.ExternalServiceMiddleware',
-                        'tom_common.middleware.AuthStrategyMiddleware',
-                        'tom_registration.middleware.RedirectAuthenticatedUsersFromRegisterMiddleware'])
+                        'bhtom_common.middleware.Raise403Middleware',
+                        'bhtom_common.middleware.ExternalServiceMiddleware',
+                        'bhtom_common.middleware.AuthStrategyMiddleware',
+                        'bhtom_custom_registration.bhtom_registration.middleware.RedirectAuthenticatedUsersFromRegisterMiddleware'])
 class TestMiddleware(TestCase):
     def setUp(self):
         self.user = User.objects.create(username='testuser')

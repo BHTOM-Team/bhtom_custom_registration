@@ -1,4 +1,4 @@
-from tom_common.forms import CustomUserCreationForm
+from bhtom_base.bhtom_common.forms import CustomUserCreationForm
 
 
 class OpenRegistrationForm(CustomUserCreationForm):
