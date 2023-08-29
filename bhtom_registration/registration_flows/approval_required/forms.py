@@ -2,12 +2,26 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 
 from bhtom_base.bhtom_common.forms import CustomUserCreationForm
-
+from bhtom_custom_registration.bhtom_registration.models import LatexUser
 
 class RegistrationApprovalForm(CustomUserCreationForm):
     """
     Form for handling registration requests in the approval required registration flow. Sets the user to inactive.
     """
+    latex_name = forms.CharField(required=True, label='Latex Name*',
+                                 help_text="Your name as you want it to appear correctly in potential publications")
+    latex_affiliation = forms.CharField(required=True, label='Latex Affiliation*',
+                                        help_text="Your affiliation as you want it to appear correctly in potential publications")
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        try:
+            user = kwargs.get('instance')
+            db = LatexUser.objects.get(user=user)
+
+        except Exception as e:
+            db = None
+
+
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_active = False
@@ -16,7 +30,11 @@ class RegistrationApprovalForm(CustomUserCreationForm):
         if commit:
             user.save()
             self.save_m2m()
-
+            dp, created= LatexUser.objects.get_or_create(user=user)
+            dp.user = user
+            dp.latex_name = self.cleaned_data['latex_name']
+            dp.latex_affiliation = self.cleaned_data['latex_affiliation']
+            dp.save()
         return user
 
 
