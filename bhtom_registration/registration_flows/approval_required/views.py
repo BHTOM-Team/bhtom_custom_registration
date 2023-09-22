@@ -17,7 +17,7 @@ from bhtom_base.bhtom_common.mixins import SuperuserRequiredMixin
 from bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.forms import ApproveUserForm
 from bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.forms import RegistrationApprovalForm
 
-logger: BHTOMLogger = BHTOMLogger(__name__, '[bhtom_registration]')
+logger: BHTOMLogger = BHTOMLogger(__name__, 'Bhtom: bhtom_registration')
 secret = dotenv_values(os.path.join(BASE_DIR, 'bhtom2/.bhtom.env'))
 
 
