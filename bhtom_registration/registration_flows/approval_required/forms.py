@@ -47,9 +47,18 @@ class ApproveUserForm(CustomUserCreationForm):
     Form for handling user registration approval requests.
     """
     def __init__(self, *args, **kwargs):
+        try:
+            data = LatexUser.objects.get(user_id=kwargs['instance'].id)
+        except Exception as e:
+            data = None    
         super().__init__(*args, **kwargs)
         self.fields.pop('password1')
         self.fields.pop('password2')
+        if data:
+            self.initial['latex_name'] = data.latex_name
+            self.initial['latex_affiliation']= data.latex_affiliation
+            self.initial['address'] = data.address
+            self.initial['about_me'] = data.about_me
 
     def save(self, commit=True):
         # NOTE: The superclass call is specifically to forms.ModelForm rather than CustomUserCreationForm--
