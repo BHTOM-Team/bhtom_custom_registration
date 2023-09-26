@@ -1,5 +1,3 @@
-import logging
-
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login
@@ -8,9 +6,10 @@ from django.views.generic.edit import CreateView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
+from bhtom2.utils.bhtom_logger import BHTOMLogger
 from bhtom_custom_registration.bhtom_registration.registration_flows.open.forms import OpenRegistrationForm
 
-logger = logging.getLogger(__name__)
+logger: BHTOMLogger = BHTOMLogger(__name__, 'Bhtom: bhtom_registration')
 
 
 class OpenRegistrationView(CreateView):

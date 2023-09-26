@@ -1,20 +1,18 @@
-import logging
-from smtplib import SMTPException
 
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User, Group
-from django.contrib.sites.models import Site
-from django.core.mail import mail_managers, send_mail
+from django.core.mail import send_mail
 from django.views.generic.edit import CreateView, UpdateView
-from django.shortcuts import redirect, reverse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
+from bhtom2.utils.bhtom_logger import BHTOMLogger
 from bhtom_base.bhtom_common.mixins import SuperuserRequiredMixin
 from bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.forms import ApproveUserForm
 from bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.forms import RegistrationApprovalForm
 
-logger = logging.getLogger(__name__)
+logger: BHTOMLogger = BHTOMLogger(__name__, 'Bhtom: bhtom_registration')
 
 
 # TODO: Add post-approval hooks that actually handle the sending of email
