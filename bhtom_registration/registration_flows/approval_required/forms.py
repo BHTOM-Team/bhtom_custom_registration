@@ -10,10 +10,10 @@ class RegistrationApprovalForm(CustomUserCreationForm):
     """
     latex_name = forms.CharField(required=True, label='Latex Name*',
                                  help_text="Your name as you want it to appear correctly in potential publications")
-    latex_affiliation = forms.CharField(required=True, label='Address',
+    latex_affiliation = forms.CharField(required=True, label='Affiliation',
                                         help_text="Your affiliation as you want it to appear correctly in potential publications")
-    address = forms.CharField(label='Address',)
-    about_me = forms.CharField(label='About me')
+    address = forms.CharField(required=False,label='Address',)
+    about_me = forms.CharField(required=False,label='About me')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         try:
