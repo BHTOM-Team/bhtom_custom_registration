@@ -7,4 +7,4 @@ class LatexUser(models.Model):
     latex_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='LaTeX name')
     latex_affiliation = models.CharField(max_length=255, null=True, blank=True, verbose_name='LaTeX affiliation')
     address = models.CharField(max_length=255, null=True, blank=True, verbose_name='Address')
-    about_me = models.CharField(max_length=255, null=True, blank=True, verbose_name='About me')
+    about_me = models.TextField(null=True, blank=True, verbose_name='About me')
