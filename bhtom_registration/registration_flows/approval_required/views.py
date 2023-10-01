@@ -61,13 +61,4 @@ class UserApprovalView(SuperuserRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-
-        if self.object.email is not None:
-            try:
-                send_mail(settings.EMAILTET_ACTIVATEUSER_TITLE, settings.EMAILTET_ACTIVATEUSER,
-                          settings.EMAIL_HOST_USER, [self.object.email], fail_silently=False)
-                logger.info('Ativate user, Send mail: ' + str( self.object.email))
-            except Exception as smtpe:
-                logger.error(f'Unable to send email: {smtpe}')
-
         return response
