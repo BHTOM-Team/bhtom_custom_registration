@@ -14,7 +14,7 @@ class RegistrationApprovalForm(CustomUserCreationForm):
                                         help_text="Your affiliation as you want it to appear correctly in potential publications")
     address = forms.CharField(required=False,label='Address',)
     about_me = forms.CharField(required=False,label='About me')
-    orcid_id = forms.CharField(required=False,label='ORCID ID')
+    orcid_id = forms.CharField(label='ORCID id, more details https://orcid.org/')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         try:
