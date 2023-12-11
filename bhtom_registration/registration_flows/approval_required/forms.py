@@ -46,7 +46,14 @@ class ApproveUserForm(CustomUserCreationForm):
         if commit:
             user.save()
             self.save_m2m()
-
+            dp, created = LatexUser.objects.get_or_create(user=user)
+            dp.user = user
+            dp.latex_name = self.cleaned_data['latex_name']
+            dp.latex_affiliation = self.cleaned_data['latex_affiliation']
+            dp.address = self.cleaned_data['address']
+            dp.about_me = self.cleaned_data['about_me']
+            dp.orcid_id = self.cleaned_data['orcid_id']
+            dp.save()
         return user
 
 
