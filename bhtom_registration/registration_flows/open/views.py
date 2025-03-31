@@ -3,9 +3,9 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.models import User, Group
 from django.views.generic.edit import CreateView
-from django.shortcuts import redirect
+from django.shortcuts import redirect,render
 from django.urls import reverse_lazy
-
+from django.shortcuts import render
 from bhtom2.utils.bhtom_logger import BHTOMLogger
 from bhtom_custom_registration.bhtom_registration.registration_flows.open.forms import OpenRegistrationForm
 

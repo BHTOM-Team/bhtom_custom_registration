@@ -4,9 +4,12 @@ from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from django.core.mail import send_mail
 from django.views.generic.edit import CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
+from django.shortcuts import render
 from django.urls import reverse_lazy
-
+from django.views import View
+from bhtom_custom_registration.bhtom_registration.models import LatexUser
 from bhtom2.utils.bhtom_logger import BHTOMLogger
 from bhtom_base.bhtom_common.mixins import SuperuserRequiredMixin
 from bhtom_custom_registration.bhtom_registration.registration_flows.approval_required.forms import ApproveUserForm
@@ -63,3 +66,22 @@ class UserApprovalView(SuperuserRequiredMixin, UpdateView):
     def form_valid(self, form):
         response = super().form_valid(form)
         return response
+
+class AcceptTerms(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        try:
+            user_info = LatexUser.objects.get(user=request.user)
+            user_info.accepted_terms = True
+            user_info.save()
+            messages.success(request, "Terms & Conditions accepted successfully.")
+        except LatexUser.DoesNotExist:
+            messages.error(request, "User profile not found.")
+            logger.error(f"LatexUser profile not found for user {request.user}")
+        except Exception as e:
+            messages.error(request, "An error occurred while accepting the terms.")
+            logger.error(f"Error updating terms acceptance for user {request.user}: {e}")
+
+        return redirect("/")
+
+    def get(self, request, *args, **kwargs):
+        return render(request, "terms.html")

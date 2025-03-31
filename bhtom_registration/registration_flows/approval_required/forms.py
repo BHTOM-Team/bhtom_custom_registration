@@ -37,6 +37,7 @@ class ApproveUserForm(CustomUserCreationForm):
             self.initial['address'] = data.address
             self.initial['about_me'] = data.about_me
             self.initial['orcid_id'] = data.orcid_id
+            self.initial['accepted_terms'] = data.accepted_terms
 
     def save(self, commit=True):
         # NOTE: The superclass call is specifically to forms.ModelForm rather than CustomUserCreationForm--
@@ -52,6 +53,7 @@ class ApproveUserForm(CustomUserCreationForm):
             additionalInfo.address = self.cleaned_data['address']
             additionalInfo.about_me = self.cleaned_data['about_me']
             additionalInfo.orcid_id = self.cleaned_data['orcid_id']
+            additionalInfo.accepted_terms = self.cleaned_data['accepted_terms']
             additionalInfo.save()
         return user
 

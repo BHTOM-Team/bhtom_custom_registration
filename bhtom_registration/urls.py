@@ -9,5 +9,5 @@ app_name = 'bhtom_custom_registration.bhtom_registration'
 urlpatterns = [
     path('register/open/', OpenRegistrationView.as_view(), name='register-open'),
     path('register/approval/', ApprovalRegistrationView.as_view(), name='register-approval'),
-    path('approve/<int:pk>/', UserApprovalView.as_view(), name='approve')
+    path('approve/<int:pk>/', UserApprovalView.as_view(), name='approve'),
 ]

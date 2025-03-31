@@ -1,0 +1,11 @@
+{% extends 'bhtom_common/base.html' %}
+
+{% block content %}
+  <h1>Terms & Conditions</h1>
+  <p>Please read and accept the terms to continue using the platform.</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Accept Terms & Conditions</button>
+  </form>
+{% endblock %}

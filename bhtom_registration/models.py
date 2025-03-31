@@ -9,3 +9,4 @@ class LatexUser(models.Model):
     address = models.CharField(max_length=255, null=True, blank=True, verbose_name='Address')
     about_me = models.TextField(null=True, blank=True, verbose_name='About me')
     orcid_id = models.CharField(max_length=255, null=True, blank=True, verbose_name='ORCCID ID')
+    accepted_terms = models.BooleanField(default=False)
