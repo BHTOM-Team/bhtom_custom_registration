@@ -1,7 +1,13 @@
 {% extends 'bhtom_common/base.html' %}
-{% load bootstrap4 %}
+{% load bootstrap4 static %}
 {% block title %}Sign up{% endblock %}
 {% block content %}
+    <style>
+      /* Add space at the top of the CAPTCHA input field */
+      #id_captcha_1 {
+          margin-top: 10px; /* Adjust this value as needed */
+      }
+    </style>
 <h2>Sign up</h2>
 <form action="" method="POST">
 {% csrf_token %}
@@ -13,3 +19,4 @@
 {% endbuttons %}
 </form>
 {% endblock %}
+
