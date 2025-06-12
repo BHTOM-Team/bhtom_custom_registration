@@ -31,6 +31,7 @@ class ApproveUserForm(CustomUserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields.pop('password1')
         self.fields.pop('password2')
+        self.fields.pop('captcha', None)
         if data:
             self.initial['latex_name'] = data.latex_name
             self.initial['latex_affiliation'] = data.latex_affiliation
