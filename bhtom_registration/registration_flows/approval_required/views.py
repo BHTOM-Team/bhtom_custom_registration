@@ -39,7 +39,7 @@ class ApprovalRegistrationView(CreateView):
 
         
         try:
-            email_params = "'{0}', '{1}', '{2}', '{3}', 'https://bh-tom2.astrolabs.pl/users/'".format(self.object.username, self.object.first_name,
+            email_params = "'{0}', '{1}', '{2}', '{3}', 'https://bh-tom2.astrouw.edu.pl/users/'".format(self.object.username, self.object.first_name,
                                                            self.object.last_name, self.object.email)
             send_mail(settings.EMAILTEXT_REGISTEADMIN_TITLE, settings.EMAILTEXT_REGISTEADMIN + email_params,
                       settings.EMAIL_HOST_USER,
